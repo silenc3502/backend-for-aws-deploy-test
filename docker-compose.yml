@@ -2,6 +2,7 @@ version: "3.7"
 services:
   db:
     image: "mysql:8.0"
+    platform: linux/arm64v8
     container_name: backend-deploy-test-db
     volumes:
       - dbdata:/var/lib/mysql
@@ -18,6 +19,7 @@ services:
       - app
   server:
     image: "backend-deploy-test/backend-deploy-test-server:latest"
+    platform: linux/arm64v8
     build: .
     container_name: backend-deploy-test-server
     restart: unless-stopped
