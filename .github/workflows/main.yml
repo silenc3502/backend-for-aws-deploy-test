@@ -55,5 +55,4 @@ jobs:
         run: |
           docker rm -f $(docker ps -qa)
           docker pull --platform linux/amd64 ${{ env.DOCKER_IMAGE }}:latest
-          docker-compose up -d
-          docker image prune -f
+          docker run --name backend-server -d ${{ env.DOCKER_IMAGE }}:latest
