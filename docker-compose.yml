@@ -23,8 +23,6 @@ services:
     restart: unless-stopped
     volumes:
       - appdata:/app
-    depends_on:
-      - redis
     ports:
       - "7777:7777"
     command:
