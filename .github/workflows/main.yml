@@ -7,7 +7,7 @@ on:
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/trading
   VERSION: ${{ github.sha }}
-  NAME: backend-deploy-test/backend-deploy-test-server
+  NAME: backend-deploy-test-server
 
 jobs:
   build:
@@ -53,5 +53,7 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Docker run
         run: |
-          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 8080:5000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          #docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
+          #docker run -d -p 8080:5000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker stop ${{ env.NAME }} && docker rm -fv ${{ env.NAME }}
+          docker run -d -p 8000:8000 --name cicd --restart always ${{ env.DOCKER_IMAGE }}
