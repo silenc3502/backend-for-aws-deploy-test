@@ -54,6 +54,6 @@ jobs:
       - name: Docker run
         run: |
           docker rm -f $(docker ps -qa)
-          docker pull ${{ env.DOCKER_IMAGE }}:latest
+          docker pull --platform linux/amd64 ${{ env.DOCKER_IMAGE }}:latest
           docker-compose up -d
           docker image prune -f
