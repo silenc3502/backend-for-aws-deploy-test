@@ -53,5 +53,7 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Docker run
         run: |
-          docker stop ${{ env.NAME }} && docker rm -fv ${{ env.NAME }}
-          docker run -d -p 8000:8000 --name cicd --restart always ${{ env.DOCKER_IMAGE }}
+          docker rm -f $(docker ps -qa)
+          docker pull ${{ env.DOCKER_IMAGE }}:latest
+          docker-compose up -d
+          docker image prune -f
