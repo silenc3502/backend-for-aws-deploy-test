@@ -5,7 +5,6 @@ services:
     platform: linux/arm64
     build: .
     container_name: backend-for-aws-deploy-test
-    restart: unless-stopped
     volumes:
       - appdata:/app
     ports:
