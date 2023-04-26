@@ -7,9 +7,9 @@ on:
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/trading
   VERSION: ${{ github.sha }}
-  NAME: backend-deploy-test-server
+  NAME: backend-server
 
-jobs:
+jobs: 
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -54,6 +54,5 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Docker run
         run: |
-          docker rm -f $(docker ps -qa)
-          docker pull --platform linux/amd64 ${{ env.DOCKER_IMAGE }}:latest
-          docker run --name backend-server -d ${{ env.DOCKER_IMAGE }}:latest
+          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 7777:7777 --name backend-for-aws-deploy-test --restart always ${{ env.DOCKER_IMAGE }}:latest
