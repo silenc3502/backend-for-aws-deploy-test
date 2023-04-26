@@ -30,6 +30,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
             
+      - name: make application-prod.properties
+        run: |
+            cd ./src/main/resources
+            touch ./application-prod.properties
+            echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
+        shell: bash
+            
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
@@ -58,8 +65,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
           
-      - name: Docker run
-        run: |
-          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 8888:8888 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+      - name: Deploy to prod
+        uses: appleboy/ssh-action@master
+        id: deploy-prod
+        if: contains(github.ref, 'main')
+        with:
+          host: ${{ secrets.HOST_PROD }}
+          username: ec2-user
+          key: ${{ secrets.PRIVATE_KEY }}
+          envs: GITHUB_SHA
+          script: |
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull ${{ env.DOCKER_IMAGE }}:latest
+            docker-compose up -d
+            docker image prune -f
       
