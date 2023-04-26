@@ -1,27 +1,10 @@
 version: "3.7"
 services:
-  db:
-    image: "mysql:8.0"
-    platform: linux/arm64
-    container_name: backend-deploy-test-db
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./docker/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
-      - ./docker/mysql/logs:/var/log/mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-    networks:
-      - app
   server:
     image: "backend-deploy-test/backend-deploy-test-server:latest"
     platform: linux/arm64
     build: .
-    container_name: backend-deploy-test-server
+    container_name: backend-for-aws-deploy-test
     restart: unless-stopped
     volumes:
       - appdata:/app
@@ -31,7 +14,6 @@ services:
       - bash
       - -c
       - |
-        /wait-for-it.sh db:3306 -t 15
         java -jar /app.jar
     networks:
       - app
@@ -41,7 +23,5 @@ networks:
     driver: bridge
 
 volumes:
-  dbdata:
-    driver: local
   appdata:
     driver: local
