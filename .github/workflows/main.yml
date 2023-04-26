@@ -5,6 +5,11 @@ on:
     branches:
       - main
       
+env:
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/backend-server
+  VERSION: ${{ github.sha }}
+  NAME: backend-server
+      
 jobs:
   run-unit-tests:
     runs-on: self-hosted
@@ -34,3 +39,40 @@ jobs:
         
       - name: Test with Gradle
         run: ./gradlew test
+
+
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ env.VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+            
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}:latest
+          platforms: linux/amd64,linux/arm64
+        
+      
