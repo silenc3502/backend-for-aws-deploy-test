@@ -1,26 +1,10 @@
 version: "3.7"
 services:
   server:
-    image: "backend-deploy-test/backend-deploy-test-server:latest"
     platform: linux/arm64
-    build: .
     container_name: backend-for-aws-deploy-test
-    volumes:
-      - appdata:/app
+    image: silenc3502/backend-deploy-test-server
+    expose:
+      - 7777
     ports:
-      - "7777:7777"
-    command:
-      - bash
-      - -c
-      - |
-        java -jar /app.jar
-    networks:
-      - app
-
-networks:
-  app:
-    driver: bridge
-
-volumes:
-  appdata:
-    driver: local
+      - 7777:7777
