@@ -77,8 +77,16 @@ jobs:
             ls -al
             cd actions-runner
             pwd
-            docker rm -f $(docker ps -qa --filter ancestor=mysql:8.0)
-            docker rm -f $(docker ps -qa --filter ancestor=backend-deploy-test/backend-deploy-test-server:latest)
+            if [[ "$(docker ps -q --filter ancestor=mysql:8.0)" ]]; then
+              docker rm -f $(docker ps -qa --filter ancestor=mysql:8.0)
+            fi
+            echo "pass mysql-container"
+            
+            if [[ "$(docker ps -qa --filter ancestor=backend-deploy-test/backend-deploy-test-server:latest)" ]]; then
+              docker rm -f $(docker ps -qa --filter ancestor=backend-deploy-test/backend-deploy-test-server:latest)
+            fi
+            echo "pass backend-deploy-test/backend-deploy-test-server:latest"
+            
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
             sudo docker pull ${{ env.DOCKER_IMAGE }}:latest
             docker-compose up --build -d
