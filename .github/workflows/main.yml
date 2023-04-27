@@ -76,7 +76,9 @@ jobs:
             pwd
             ls -al
             cd actions-runner
-            sudo docker rm -f $(docker ps -qa)
+            pwd
+            docker rm -f $(docker ps -qa --filter ancestor=mysql:8.0)
+            docker rm -f $(docker ps -qa --filter ancestor=backend-deploy-test/backend-deploy-test-server:latest)
             sudo docker pull ${{ env.DOCKER_IMAGE }}:latest
             docker-compose up --build -d
             docker image prune -f
