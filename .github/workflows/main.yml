@@ -88,7 +88,8 @@ jobs:
             echo "pass backend-deploy-test/backend-deploy-test-server:latest"
             
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
-            sudo docker pull ${{ env.DOCKER_IMAGE }}:latest
+            
+            docker pull ghcr.io/silenc3502/backend-server:latest
             docker-compose up --build -d
             docker image prune -f
             docker logout
