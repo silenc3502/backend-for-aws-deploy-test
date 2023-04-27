@@ -83,7 +83,7 @@ jobs:
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
             
             docker pull ghcr.io/silenc3502/backend-server:latest
-            docker-compose up --build -d
+
             docker image prune -f
             docker logout
       
