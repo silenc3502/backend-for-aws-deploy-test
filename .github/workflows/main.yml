@@ -42,7 +42,7 @@ jobs:
       - name: Docker build & push to prod
         run: |
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
-            docker build --platform linux/arm64 -f Dockerfile -t ghcr.io/silenc3502/backend-server .
+            docker build --platform linux/amd64,linux/arm64 -f Dockerfile -t ghcr.io/silenc3502/backend-server .
             docker push ghcr.io/silenc3502/backend-server
             docker logout
 
