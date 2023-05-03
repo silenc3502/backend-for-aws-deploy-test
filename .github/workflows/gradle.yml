@@ -24,7 +24,6 @@ jobs:
         
     - name: Create application.yaml for CI Test
       run: |
-        cat build/reports/tests/test/index.html
         mkdir -p src/main/resources
         cd src/main/resources
         pwd
