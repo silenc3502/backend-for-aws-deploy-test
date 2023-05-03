@@ -35,6 +35,7 @@ jobs:
       
     - name: Create application.yaml for CI Test
       run: |
+        mkdir -p src/main/resources
         cd src/main/resources
         pwd
         echo "{{ secrets.CI_TEST_CONFIG }}" > application.yaml
