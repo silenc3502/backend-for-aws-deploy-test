@@ -6,7 +6,7 @@ spring:
   profiles
     active: default
   datasource:
-    url: jdbc:mysql://localhost:3306/jpa_test?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/ci_test_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
     password: eddi@123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,7 +31,7 @@ server:
 spring:
   profiles: deploy
   datasource:
-    url: jdbc:mysql://mysql-container/deploy_test_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
+    url: jdbc:mysql://mysql-container/ci_test_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
     password: eddi@123
     driver-class-name: com.mysql.cj.jdbc.Driver
