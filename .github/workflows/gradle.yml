@@ -38,7 +38,7 @@ jobs:
         
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
     - name: Test with Gradle
-      run: ./gradlew test --stacktrace
+      run: ./gradlew -Dspring.profiles.active=local test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
