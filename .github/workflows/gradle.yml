@@ -39,6 +39,7 @@ jobs:
         cd src/main/resources
         pwd
         echo "{{ secrets.CI_TEST_CONFIG }}" > application.yaml
+        cat application.yaml
       
     - name: Build Project with Gradle
       run: |
@@ -46,7 +47,9 @@ jobs:
         ./gradlew clean build -x test
         
     - name: Test with Gradle
-      run: ./gradlew test
+      run: |
+        cat src/main/resources/application.yaml
+        ./gradlew test
 
     - name: send TEST_FINISH_TRIGGER
       run: |
