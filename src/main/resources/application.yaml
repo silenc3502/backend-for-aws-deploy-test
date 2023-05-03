@@ -1,9 +1,9 @@
 
 server:
   port: 7777
-  profiles: local
 
 spring:
+  profiles: local
   datasource:
     url: jdbc:mysql://localhost:3306/jpa_test?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
@@ -26,9 +26,9 @@ spring:
 
 server:
   port: 7777
-  profiles: deploy
 
 spring:
+  profiles: deploy
   datasource:
     url: jdbc:mysql://mysql-container/deploy_test_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
