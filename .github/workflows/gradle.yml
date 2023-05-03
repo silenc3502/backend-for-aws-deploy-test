@@ -38,8 +38,8 @@ jobs:
         mkdir -p src/main/resources
         cd src/main/resources
         pwd
-        echo "{{ secrets.CI_TEST_CONFIG }}" > application.yaml
-        cat application.yaml
+        echo "{{ secrets.CI_TEST_CONFIG }}" > application.properties
+        cat application.properties
       
     - name: Build Project with Gradle
       run: |
@@ -48,7 +48,7 @@ jobs:
         
     - name: Test with Gradle
       run: |
-        cat src/main/resources/application.yaml
+        cat src/main/resources/application.properties
         ./gradlew test
 
     - name: send TEST_FINISH_TRIGGER
