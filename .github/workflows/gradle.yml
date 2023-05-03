@@ -46,6 +46,11 @@ jobs:
         pwd
         ./gradlew clean build -x test
         
+    - name: Setup and execute Gradle 'test' task
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: test
+        
     - name: Test with Gradle
       run: |
         cat src/main/resources/application.properties
