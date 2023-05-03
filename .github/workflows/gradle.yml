@@ -40,9 +40,13 @@ jobs:
         pwd
         ls
         cat application.yaml
+        echo ${{ secrets.CI_TEST_CONFIG }} > application.yaml
+        cat application.yaml
       
     - name: Build Project with Gradle
-      run: ./gradlew clean build -x test
+      run: |
+        pwd
+        ./gradlew clean build -x test
         
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
     ## check about -Dspring.profiles.active=local option
