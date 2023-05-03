@@ -38,7 +38,7 @@ jobs:
         mkdir -p src/main/resources
         cd src/main/resources
         pwd
-        echo "{{ secrets.CI_TEST_CONFIG }}" > application.properties
+        echo "${{ secrets.CI_TEST_CONFIG }}" > application.properties
         cat application.properties
       
     - name: Build Project with Gradle
