@@ -36,8 +36,9 @@ jobs:
     - name: Build Project with Gradle
       run: ./gradlew clean build -x test
         
+    ## need to check use SPRING_PROFILES_ACTIVE=[local]
     - name: Test with Gradle
-      run: SPRING_PROFILES_ACTIVE=[local] ./gradlew test --stacktrace
+      run: ./gradlew test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
