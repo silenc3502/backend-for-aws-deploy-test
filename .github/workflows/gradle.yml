@@ -44,7 +44,7 @@ jobs:
     - name: Test with Gradle
       run: |
         cat src/main/resources/application.properties
-        ./gradlew test
+        ./gradlew --info test
 
     - name: send TEST_FINISH_TRIGGER
       run: |
