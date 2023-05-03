@@ -3,7 +3,8 @@ server:
   port: 7777
 
 spring:
-  profiles: local
+  profiles
+    active: default
   datasource:
     url: jdbc:mysql://localhost:3306/jpa_test?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
