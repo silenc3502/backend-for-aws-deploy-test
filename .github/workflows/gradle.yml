@@ -33,13 +33,22 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
+    - name: make application.yaml for test code
+      run: |
+        pwd
+        cd src/main/resources
+        pwd
+        ls
+        cat application.yaml
+      
     - name: Build Project with Gradle
       run: ./gradlew clean build -x test
         
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
     ## check about -Dspring.profiles.active=local option
     - name: Test with Gradle
-      run: ./gradlew test --stacktrace
+      run: |
+        ./gradlew test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
