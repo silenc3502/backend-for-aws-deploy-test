@@ -37,7 +37,7 @@ jobs:
       run: ./gradlew clean build -x test
         
     - name: Test with Gradle
-      run: SPRING_PROFILES_ACTIVE=[local] ./gradlew test
+      run: SPRING_PROFILES_ACTIVE=[local] ./gradlew test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
