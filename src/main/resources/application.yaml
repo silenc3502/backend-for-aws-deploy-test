@@ -4,7 +4,7 @@ server:
 
 spring:
   profiles
-    active: default
+    active: local
   datasource:
     url: jdbc:mysql://localhost:3306/ci_test_db?allowpublickeyretrieval=true&usessl=false&serverTimezone=UTC
     username: eddi
