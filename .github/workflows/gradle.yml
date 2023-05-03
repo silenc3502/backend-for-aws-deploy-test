@@ -39,7 +39,7 @@ jobs:
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
     ## check about -Dspring.profiles.active=local option
     - name: Test with Gradle
-      run: SPRING_PROFILES_ACTIVE=local ./gradlew -Dspring.profiles.active=local test--stacktrace
+      run: SPRING_PROFILES_ACTIVE=local ./gradlew -Dspring.profiles.active=local test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
