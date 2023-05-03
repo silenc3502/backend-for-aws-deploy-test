@@ -37,8 +37,9 @@ jobs:
       run: ./gradlew clean build -x test
         
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
+    ## check about -Dspring.profiles.active=local option
     - name: Test with Gradle
-      run: ./gradlew test -Dspring.profiles.active=local --stacktrace
+      run: ./gradlew test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
