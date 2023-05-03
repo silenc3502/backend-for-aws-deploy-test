@@ -26,7 +26,7 @@ jobs:
       uses: samin/mysql-action@v1
       with:
         character set server: 'utf8'
-        mysql database: 'ci_test_db'
+        mysql database: 'jpa_test'
         mysql user: 'eddi'
         mysql password: ${{ secrets.MYSQL_PASSWORD }} # github Secret 탭에서 설정하세요!
         
@@ -39,7 +39,7 @@ jobs:
     ## need to check use SPRING_PROFILES_ACTIVE=[local]
     ## check about -Dspring.profiles.active=local option
     - name: Test with Gradle
-      run: SPRING_PROFILES_ACTIVE=[local] ./gradlew test --stacktrace
+      run: ./gradlew test --stacktrace
 
     - name: send TEST_FINISH_TRIGGER
       run: |
