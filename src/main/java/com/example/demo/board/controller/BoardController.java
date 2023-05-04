@@ -53,4 +53,11 @@ public class BoardController {
 
         return boardService.modify(boardId, boardRequest);
     }
+    
+    @GetMapping("/deploy-test")
+    public String printString () {
+        log.info("printString()");
+
+        return "Deploy Test";
+    }
 }
