@@ -33,6 +33,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
             
+      - name: Create application.yaml for CD Deploy
+        run: |
+          mkdir -p src/main/resources
+          cd src/main/resources
+          pwd
+          echo "${{ secrets.CD_DEPLOY_CONFIG }}" > application.properties
+          cat application.properties
+            
       ## gradle build
       - name: Build with Gradle
         run: ./gradlew build -x test
