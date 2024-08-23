@@ -47,7 +47,9 @@ jobs:
 
       ## Check jar
       - name: Check jar file
-        run: ls
+        run: |
+          ls build
+          ls build/libs
         
       ## docker build & push to production
       - name: Docker build & push to prod
