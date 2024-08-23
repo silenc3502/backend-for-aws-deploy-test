@@ -44,6 +44,10 @@ jobs:
       ## gradle build
       - name: Build with Gradle
         run: ./gradlew build -x test
+
+      ## Check jar
+      - name: Check jar file
+        run: ls
         
       ## docker build & push to production
       - name: Docker build & push to prod
